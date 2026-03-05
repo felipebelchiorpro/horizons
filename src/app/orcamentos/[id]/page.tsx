@@ -231,7 +231,6 @@ export default function VisualizarOrcamento() {
                 <div className="flex justify-between items-start border-b-2 border-slate-200 pb-8 mb-10">
                     <div className="flex items-center gap-3">
                         <img src="/logo-contrato.png" alt="Logo do Orçamento" className="h-10 w-auto object-contain" />
-                        <span className="text-xl font-black text-slate-900 tracking-tighter">VENTURE</span>
                     </div>
                     <div className="text-right text-[10px] text-slate-500 font-medium">
                         <p>Uma Empresa do Grupo Belchior Venture Business</p>
