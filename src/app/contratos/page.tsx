@@ -102,7 +102,7 @@ export default function Contratos() {
         }
     };
 
-    const generatePDF = () => {
+    const generatePDF = async () => {
         if (!selectedCliente) return;
 
         const doc = new jsPDF();
@@ -110,10 +110,36 @@ export default function Contratos() {
         const totalValue = isCustomService ? Number(valorManual || 0) : Number(selectedServico?.valorBase || 0);
         const dateStr = new Date().toLocaleDateString('pt-BR');
 
-        // Helper to handle pagination
+        // Helper to load image
+        const loadImage = (url: string): Promise<string> => {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.crossOrigin = 'Anonymous';
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    const ctx = canvas.getContext('2d');
+                    if (ctx) ctx.drawImage(img, 0, 0);
+                    resolve(canvas.toDataURL('image/png'));
+                };
+                img.onerror = () => reject();
+                img.src = url;
+            });
+        };
+
         let currentY = 20;
         const pageHeight = doc.internal.pageSize.getHeight();
-        const marginBottom = 20; // safe zone before page break
+        const marginBottom = 20;
+
+        let logoBase64 = null;
+        try { logoBase64 = await loadImage('/logo.png'); } catch (e) { }
+
+        if (logoBase64) {
+            // Center logo width=30
+            doc.addImage(logoBase64, "PNG", 90, 10, 30, 8);
+            currentY = 30; // Push down
+        }
 
         const checkAddPage = (requiredSpace: number) => {
             if (currentY + requiredSpace > pageHeight - marginBottom) {
@@ -551,9 +577,7 @@ export default function Contratos() {
                     {/* Letterhead */}
                     <div className="flex justify-between items-start border-b-2 border-slate-200 pb-8 mb-10">
                         <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 bg-blue-600 rounded flex items-center justify-center">
-                                <span className="text-white font-bold text-xl leading-none">V</span>
-                            </div>
+                            <img src="/logo.png" alt="Logo" className="h-8 w-auto object-contain" />
                             <span className="text-xl font-black text-slate-900 tracking-tighter">VENTURE</span>
                         </div>
                         <div className="text-right text-[10px] text-slate-500 font-medium">

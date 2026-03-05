@@ -62,17 +62,47 @@ export default function VisualizarFatura() {
         window.print();
     };
 
-    const handleDownloadPDF = () => {
+    const handleDownloadPDF = async () => {
         if (!fatura) return;
+        setIsGeneratingPDF(true);
 
         try {
             const doc = new jsPDF();
             const docId = `OS-${fatura.id.substring(0, 8).toUpperCase()}`;
 
+            // Helper function to load image
+            const loadImage = (url: string): Promise<string> => {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.crossOrigin = 'Anonymous';
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        const ctx = canvas.getContext('2d');
+                        if (ctx) ctx.drawImage(img, 0, 0);
+                        resolve(canvas.toDataURL('image/png'));
+                    };
+                    img.onerror = () => reject();
+                    img.src = url;
+                });
+            };
+
+            let logoBase64 = null;
+            try {
+                logoBase64 = await loadImage('/logo.png');
+            } catch (e) {
+                console.warn("Logo could not be loaded for PDF");
+            }
+
             // Cabeçalho da Empresa
-            doc.setFontSize(22);
-            doc.setFont("helvetica", "bold");
-            doc.text("VENTURE", 20, 20);
+            if (logoBase64) {
+                doc.addImage(logoBase64, "PNG", 20, 15, 30, 12);
+            } else {
+                doc.setFontSize(22);
+                doc.setFont("helvetica", "bold");
+                doc.text("VENTURE", 20, 20);
+            }
 
             doc.setFontSize(8);
             doc.setFont("helvetica", "normal");
@@ -144,6 +174,8 @@ export default function VisualizarFatura() {
         } catch (err) {
             console.error("Erro ao gerar PDF:", err);
             alert("Ocorreu um erro ao gerar o PDF.");
+        } finally {
+            setIsGeneratingPDF(false);
         }
     };
 
@@ -202,9 +234,7 @@ export default function VisualizarFatura() {
                 {/* Letterhead */}
                 <div className="flex justify-between items-start border-b-2 border-slate-200 pb-8 mb-10">
                     <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-blue-600 rounded flex items-center justify-center">
-                            <span className="text-white font-bold text-xl leading-none">V</span>
-                        </div>
+                        <img src="/logo.png" alt="Logo" className="h-10 w-auto object-contain" />
                         <span className="text-xl font-black text-slate-900 tracking-tighter">VENTURE</span>
                     </div>
                     <div className="text-right text-[10px] text-slate-500 font-medium">
