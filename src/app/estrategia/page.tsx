@@ -188,7 +188,7 @@ export default function Estrategia() {
 
                     <div className="flex items-center gap-3">
                         <select
-                            val={trimestreFiltro}
+                            value={trimestreFiltro}
                             onChange={(e) => setTrimestreFiltro(e.target.value)}
                             className="bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white font-bold outline-none focus:ring-1 focus:ring-rose-500 hover:bg-slate-700 transition-colors cursor-pointer"
                         >
