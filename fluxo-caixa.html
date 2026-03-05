@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#19335d",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#12151a",
+                        "inflow": "#10b981",
+                        "outflow": "#ef4444",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .glass {
+            background: rgba(25, 51, 93, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar (Glassmorphism) -->
+<aside class="w-64 glass h-full flex flex-col border-r border-slate-200/10 hidden md:flex">
+<div class="p-6 flex items-center gap-3">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">grid_view</span>
+</div>
+<h2 class="font-bold text-lg tracking-tight">VENTURE ERP</h2>
+</div>
+<nav class="flex-1 px-4 space-y-1 py-4">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary/20 text-white rounded-lg border border-primary/30" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-sm font-medium">Fluxo de Caixa</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">account_balance</span>
+<span class="text-sm font-medium">Balanço Patrimonial</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-sm font-medium">Relatórios DRE</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium">Gestão de Equipe</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200/10">
+<div class="flex items-center gap-3 p-2 rounded-xl bg-slate-800/40">
+<div class="size-10 rounded-full bg-primary/40 flex items-center justify-center overflow-hidden">
+<img alt="Avatar do usuário" data-alt="Foto de perfil do administrador" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfsSQ6yeXSSbHEfw_KH5yODcej5jdZxVrjnVJnAtEGZAy65c-vgSiZGfnjsO1GrESbC7Tm4si3uh4q459RJicelYNw_PML5NYIkDpq5dobzWiNACLL9hWYQrerwWaZkx3EuPvAtAmCeM8rGkkgRyEE1AFCp0PpkUTkZ26BTFq9bzbTlRXhKT5ZFhkJJ-8FOkNz6okOuE0ZY0WMkTFGb81D_1c9tFOMRFZMBSFSBJgOmedHO1L90AP4tXf8_8AL7jg68Vnm6nH9G5gu"/>
+</div>
+<div class="flex-1 overflow-hidden">
+<p class="text-xs font-semibold truncate">Lucas Silva</p>
+<p class="text-[10px] text-slate-400 truncate">Diretor Financeiro</p>
+</div>
+<span class="material-symbols-outlined text-slate-500 text-sm">settings</span>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-full overflow-y-auto custom-scrollbar">
+<!-- Header -->
+<header class="sticky top-0 z-10 glass border-b border-slate-200/10 px-8 py-4 flex items-center justify-between">
+<div>
+<nav class="flex text-xs text-slate-400 gap-2 mb-1">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span>/</span>
+<a class="hover:text-primary transition-colors" href="#">Financeiro</a>
+<span>/</span>
+<span class="text-slate-100">Fluxo de Caixa Avançado</span>
+</nav>
+<h1 class="text-2xl font-bold tracking-tight">Fluxo de Caixa Avançado</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 glass px-3 py-1.5 rounded-lg">
+<span class="material-symbols-outlined text-sm text-slate-400">calendar_month</span>
+<span class="text-xs font-medium">Jan 2024 - Jun 2024</span>
+</div>
+<button class="bg-primary text-white text-xs font-bold px-4 py-2 rounded-lg hover:bg-primary/80 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">download</span>
+                    Exportar PDF
+                </button>
+</div>
+</header>
+<div class="p-8 space-y-6">
+<!-- Top Row: Chart and Side KPIs -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Main Chart -->
+<div class="col-span-12 lg:col-span-8 bg-slate-800/20 border border-slate-200/10 rounded-xl p-6">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h3 class="font-bold text-lg">Projetado vs. Realizado</h3>
+<p class="text-sm text-slate-400">Análise comparativa mensal (R$)</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="size-3 rounded-full bg-slate-500"></span>
+<span class="text-xs text-slate-400">Projetado</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="size-3 rounded-full bg-inflow"></span>
+<span class="text-xs text-slate-400">Realizado</span>
+</div>
+</div>
+</div>
+<div class="h-64 w-full">
+<!-- Area Chart Visualization -->
+<svg class="w-full h-full overflow-visible" viewbox="0 0 800 240">
+<!-- Grid lines -->
+<line class="text-slate-800" stroke="currentColor" stroke-width="1" x1="0" x2="800" y1="200" y2="200"></line>
+<line class="text-slate-800" stroke="currentColor" stroke-width="1" x1="0" x2="800" y1="150" y2="150"></line>
+<line class="text-slate-800" stroke="currentColor" stroke-width="1" x1="0" x2="800" y1="100" y2="100"></line>
+<line class="text-slate-800" stroke="currentColor" stroke-width="1" x1="0" x2="800" y1="50" y2="50"></line>
+<!-- Projected Line (Gray) -->
+<path d="M0,180 Q133,160 266,140 T533,110 T800,90" fill="none" stroke="#64748b" stroke-dasharray="4" stroke-width="2"></path>
+<!-- Realized Area (Emerald) -->
+<path d="M0,190 Q133,170 266,120 T533,130 T800,70 V240 H0 Z" fill="url(#emerald-gradient)" opacity="0.1"></path>
+<path d="M0,190 Q133,170 266,120 T533,130 T800,70" fill="none" stroke="#10b981" stroke-width="3"></path>
+<defs>
+<lineargradient id="emerald-gradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#10b981"></stop>
+<stop offset="100%" stop-color="transparent"></stop>
+</lineargradient>
+</defs>
+</svg>
+<div class="flex justify-between mt-4 px-2">
+<span class="text-xs font-mono text-slate-500">Jan</span>
+<span class="text-xs font-mono text-slate-500">Fev</span>
+<span class="text-xs font-mono text-slate-500">Mar</span>
+<span class="text-xs font-mono text-slate-500">Abr</span>
+<span class="text-xs font-mono text-slate-500">Mai</span>
+<span class="text-xs font-mono text-slate-500">Jun</span>
+</div>
+</div>
+</div>
+<!-- Side KPIs -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-4">
+<div class="flex-1 bg-slate-800/20 border border-slate-200/10 rounded-xl p-5 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-xs font-medium text-slate-400">Liquidez Corrente</span>
+<span class="material-symbols-outlined text-inflow">account_balance_wallet</span>
+</div>
+<div>
+<p class="text-3xl font-mono font-bold">R$ 2.845.000</p>
+<p class="text-xs text-inflow flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+                                +8.2% vs mês anterior
+                            </p>
+</div>
+</div>
+<div class="flex-1 bg-slate-800/20 border border-slate-200/10 rounded-xl p-5 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-xs font-medium text-slate-400">Burn Rate Médio</span>
+<span class="material-symbols-outlined text-outflow">local_fire_department</span>
+</div>
+<div>
+<p class="text-3xl font-mono font-bold">R$ 142.000</p>
+<p class="text-xs text-slate-400 mt-1">Estimativa mensal estável</p>
+</div>
+</div>
+<div class="flex-1 bg-primary/20 border border-primary/40 rounded-xl p-5 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-xs font-medium text-slate-100">Runway Estimado</span>
+<span class="material-symbols-outlined text-primary-foreground">timer</span>
+</div>
+<div>
+<p class="text-3xl font-mono font-bold">20.0 meses</p>
+<div class="w-full bg-white/10 rounded-full h-1.5 mt-2">
+<div class="bg-primary h-1.5 rounded-full" style="width: 80%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Middle Row: Donut Charts -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Revenue by Category -->
+<div class="bg-slate-800/20 border border-slate-200/10 rounded-xl p-6">
+<h3 class="font-bold text-base mb-6">Receitas por Categoria</h3>
+<div class="flex items-center gap-8">
+<div class="relative size-32">
+<svg class="size-full" viewbox="0 0 36 36">
+<path class="text-slate-700" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="100, 100" stroke-width="3"></path>
+<path class="text-inflow" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="45, 100" stroke-linecap="round" stroke-width="4"></path>
+<path class="text-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="30, 100" stroke-dashoffset="-45" stroke-linecap="round" stroke-width="4"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-xs text-slate-500">Total</span>
+<span class="text-sm font-mono font-bold">100%</span>
+</div>
+</div>
+<div class="flex-1 space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-inflow"></span>
+<span class="text-xs text-slate-300">Consultoria</span>
+</div>
+<span class="text-xs font-mono">45%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-primary"></span>
+<span class="text-xs text-slate-300">SaaS</span>
+</div>
+<span class="text-xs font-mono">30%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-slate-500"></span>
+<span class="text-xs text-slate-300">Implementação</span>
+</div>
+<span class="text-xs font-mono">25%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Expenses by Department -->
+<div class="bg-slate-800/20 border border-slate-200/10 rounded-xl p-6">
+<h3 class="font-bold text-base mb-6">Despesas por Departamento</h3>
+<div class="flex items-center gap-8">
+<div class="relative size-32">
+<svg class="size-full" viewbox="0 0 36 36">
+<path class="text-slate-700" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="100, 100" stroke-width="3"></path>
+<path class="text-outflow" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="60, 100" stroke-linecap="round" stroke-width="4"></path>
+<path class="text-amber-500" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="20, 100" stroke-dashoffset="-60" stroke-linecap="round" stroke-width="4"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-xs text-slate-500">Total</span>
+<span class="text-sm font-mono font-bold">100%</span>
+</div>
+</div>
+<div class="flex-1 space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-outflow"></span>
+<span class="text-xs text-slate-300">Operações</span>
+</div>
+<span class="text-xs font-mono">60%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-amber-500"></span>
+<span class="text-xs text-slate-300">Marketing</span>
+</div>
+<span class="text-xs font-mono">20%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-slate-500"></span>
+<span class="text-xs text-slate-300">Recursos Humanos</span>
+</div>
+<span class="text-xs font-mono">20%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Row: Transaction Ledger -->
+<div class="bg-slate-800/20 border border-slate-200/10 rounded-xl overflow-hidden">
+<div class="p-6 border-b border-slate-200/10 flex items-center justify-between">
+<h3 class="font-bold text-lg">Livro de Transações</h3>
+<div class="flex gap-2">
+<label class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-slate-500 text-sm">search</span>
+<input class="glass bg-transparent border-none text-xs rounded-lg pl-9 pr-4 py-2 focus:ring-1 focus:ring-primary w-64" placeholder="Filtrar transações..." type="text"/>
+</label>
+<button class="glass px-3 py-2 rounded-lg text-slate-400 hover:text-white transition-all">
+<span class="material-symbols-outlined text-sm">tune</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm border-collapse">
+<thead>
+<tr class="bg-slate-800/40 text-slate-400 font-medium">
+<th class="px-6 py-4">Data</th>
+<th class="px-6 py-4">Descrição</th>
+<th class="px-6 py-4">Categoria</th>
+<th class="px-6 py-4">Conta</th>
+<th class="px-6 py-4 text-right">Valor</th>
+<th class="px-6 py-4">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200/5">
+<tr class="hover:bg-slate-800/10 transition-colors">
+<td class="px-6 py-4 font-mono text-xs">15 Jun 2024</td>
+<td class="px-6 py-4 font-medium">Recebimento Projeto Alpha</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded-full bg-inflow/10 text-inflow text-[10px] font-bold uppercase tracking-wider">Consultoria</span>
+</td>
+<td class="px-6 py-4 text-slate-400">Itaú Empresas</td>
+<td class="px-6 py-4 text-right font-mono text-inflow font-bold">+R$ 45.000,00</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5 text-inflow">
+<span class="material-symbols-outlined text-[16px] fill-1">check_circle</span>
+<span class="text-xs">Confirmado</span>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-800/10 transition-colors">
+<td class="px-6 py-4 font-mono text-xs">14 Jun 2024</td>
+<td class="px-6 py-4 font-medium">AWS Cloud Services</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded-full bg-outflow/10 text-outflow text-[10px] font-bold uppercase tracking-wider">Tecnologia</span>
+</td>
+<td class="px-6 py-4 text-slate-400">Stripe Business</td>
+<td class="px-6 py-4 text-right font-mono text-outflow font-bold">-R$ 12.450,80</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5 text-inflow">
+<span class="material-symbols-outlined text-[16px] fill-1">check_circle</span>
+<span class="text-xs">Confirmado</span>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-800/10 transition-colors">
+<td class="px-6 py-4 font-mono text-xs">12 Jun 2024</td>
+<td class="px-6 py-4 font-medium">Aluguel Headquarter SP</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded-full bg-slate-700 text-slate-300 text-[10px] font-bold uppercase tracking-wider">Infra</span>
+</td>
+<td class="px-6 py-4 text-slate-400">Santander</td>
+<td class="px-6 py-4 text-right font-mono text-outflow font-bold">-R$ 28.000,00</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5 text-amber-500">
+<span class="material-symbols-outlined text-[16px]">pending</span>
+<span class="text-xs">Pendente</span>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-800/10 transition-colors">
+<td class="px-6 py-4 font-mono text-xs">10 Jun 2024</td>
+<td class="px-6 py-4 font-medium">Assinaturas SaaS Pro</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded-full bg-inflow/10 text-inflow text-[10px] font-bold uppercase tracking-wider">SaaS</span>
+</td>
+<td class="px-6 py-4 text-slate-400">Stripe Business</td>
+<td class="px-6 py-4 text-right font-mono text-inflow font-bold">+R$ 8.920,00</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5 text-inflow">
+<span class="material-symbols-outlined text-[16px] fill-1">check_circle</span>
+<span class="text-xs">Confirmado</span>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-800/10 transition-colors">
+<td class="px-6 py-4 font-mono text-xs">08 Jun 2024</td>
+<td class="px-6 py-4 font-medium">Marketing Campaign Q2</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-500 text-[10px] font-bold uppercase tracking-wider">Marketing</span>
+</td>
+<td class="px-6 py-4 text-slate-400">Itaú Empresas</td>
+<td class="px-6 py-4 text-right font-mono text-outflow font-bold">-R$ 15.000,00</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5 text-outflow">
+<span class="material-symbols-outlined text-[16px]">cancel</span>
+<span class="text-xs">Cancelado</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 border-t border-slate-200/10 flex items-center justify-between">
+<p class="text-xs text-slate-500">Mostrando 5 de 1,248 transações</p>
+<div class="flex items-center gap-2">
+<button class="glass p-1.5 rounded hover:bg-slate-700 transition-all disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<span class="text-xs font-mono">1</span>
+<button class="glass p-1.5 rounded hover:bg-slate-700 transition-all">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

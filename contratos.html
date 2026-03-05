@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VENTURE ERP - Gerador de Contrato Dinâmico</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#19335d",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#13181f",
+                        "success": "#10b981",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(29, 36, 47, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 72, 94, 0.5);
+        }
+        .a4-preview {
+            aspect-ratio: 1 / 1.414;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background-image: radial-gradient(#e5e7eb 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #3b485e;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 overflow-hidden h-screen">
+<div class="flex h-full w-full">
+<!-- Sidebar -->
+<aside class="w-64 bg-background-dark border-r border-slate-800 flex flex-col shrink-0">
+<div class="p-6 flex flex-col h-full">
+<div class="flex items-center gap-3 mb-10">
+<div class="bg-primary rounded-lg p-2">
+<span class="material-symbols-outlined text-white">layers</span>
+</div>
+<div>
+<h1 class="text-white text-base font-bold leading-none tracking-tight">VENTURE ERP</h1>
+<p class="text-slate-500 text-xs font-medium">Contratos v4.2</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2 flex-grow">
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 bg-primary/20 text-white rounded-lg border border-primary/30" href="#">
+<span class="material-symbols-outlined text-primary-400">description</span>
+<span class="text-sm font-medium">Novo Contrato</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium">Clientes</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="text-sm font-medium">Financeiro</span>
+</a>
+<div class="mt-auto pt-6 border-t border-slate-800">
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Configurações</span>
+</a>
+</div>
+</nav>
+</div>
+</aside>
+<!-- Main Content (Split Screen) -->
+<main class="flex-grow flex h-full">
+<!-- Left Panel: Inputs -->
+<section class="w-[45%] h-full flex flex-col bg-slate-950/20 custom-scrollbar overflow-y-auto">
+<header class="p-8 pb-4">
+<div class="flex items-center gap-2 text-primary dark:text-slate-400 text-sm mb-2">
+<span>Módulos</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span>Contratos</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-white">Gerador Dinâmico</span>
+</div>
+<h2 class="text-3xl font-bold text-white tracking-tight">Novo Contrato</h2>
+<p class="text-slate-400 text-sm mt-1">Configure as cláusulas e detalhes do serviço em tempo real.</p>
+</header>
+<!-- Stepper -->
+<div class="px-8 py-4">
+<div class="flex items-center justify-between glass-card p-4 rounded-xl">
+<div class="flex flex-col items-center gap-1 group">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold border-2 border-primary">1</div>
+<span class="text-[10px] uppercase tracking-wider font-bold text-slate-100">Dados</span>
+</div>
+<div class="h-[2px] bg-primary flex-grow mx-2"></div>
+<div class="flex flex-col items-center gap-1">
+<div class="w-8 h-8 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-slate-400 text-xs font-bold">2</div>
+<span class="text-[10px] uppercase tracking-wider font-bold text-slate-500">Serviço</span>
+</div>
+<div class="h-[2px] bg-slate-800 flex-grow mx-2"></div>
+<div class="flex flex-col items-center gap-1">
+<div class="w-8 h-8 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-slate-400 text-xs font-bold">3</div>
+<span class="text-[10px] uppercase tracking-wider font-bold text-slate-500">Cronograma</span>
+</div>
+<div class="h-[2px] bg-slate-800 flex-grow mx-2"></div>
+<div class="flex flex-col items-center gap-1">
+<div class="w-8 h-8 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-slate-400 text-xs font-bold">4</div>
+<span class="text-[10px] uppercase tracking-wider font-bold text-slate-500">Pagamento</span>
+</div>
+</div>
+</div>
+<!-- Input Fields -->
+<div class="px-8 py-4 space-y-6">
+<div class="glass-card p-6 rounded-xl space-y-4">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary">person_outline</span>
+<h3 class="font-bold text-lg text-white">Dados do Cliente</h3>
+</div>
+<div class="space-y-4">
+<div>
+<label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Nome da Empresa / Cliente</label>
+<input class="w-full bg-slate-900/50 border border-slate-700 rounded-lg py-3 px-4 text-white focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Ex: Tech Solutions Ltda" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">CNPJ / CPF</label>
+<input class="w-full bg-slate-900/50 border border-slate-700 rounded-lg py-3 px-4 text-white focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="00.000.000/0001-00" type="text"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">E-mail Financeiro</label>
+<input class="w-full bg-slate-900/50 border border-slate-700 rounded-lg py-3 px-4 text-white focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="financeiro@empresa.com" type="email"/>
+</div>
+</div>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+<h3 class="font-bold text-lg text-white">Signatário Responsável</h3>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<p class="text-slate-500 text-sm mt-2">Habilitar coleta de assinatura digital vinculada ao CPF do representante legal.</p>
+</div>
+<div class="glass-card p-6 rounded-xl space-y-4">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary">description</span>
+<h3 class="font-bold text-lg text-white">Detalhes do Serviço</h3>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Escopo Principal</label>
+<textarea class="w-full bg-slate-900/50 border border-slate-700 rounded-lg py-3 px-4 text-white focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Descreva as entregas do projeto..." rows="3"></textarea>
+</div>
+</div>
+</div>
+<div class="mt-auto p-8 flex items-center justify-between border-t border-slate-800 bg-background-dark/50 sticky bottom-0 z-10">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-success">cloud_done</span>
+<span class="text-xs font-bold text-success uppercase tracking-wider">Sincronizado</span>
+</div>
+<button class="bg-success hover:bg-success/90 text-white font-bold py-4 px-8 rounded-xl flex items-center gap-3 transition-transform active:scale-95 shadow-lg shadow-success/20">
+<span>Gerar e Assinar</span>
+<span class="material-symbols-outlined">draw</span>
+</button>
+</div>
+</section>
+<!-- Right Panel: Live Preview -->
+<section class="flex-grow h-full bg-slate-200 dark:bg-slate-900 flex flex-col items-center justify-start p-10 overflow-y-auto custom-scrollbar">
+<div class="flex items-center justify-between w-full max-w-[800px] mb-6">
+<h4 class="text-slate-500 font-bold text-sm uppercase tracking-widest">Visualização em Tempo Real</h4>
+<div class="flex gap-2">
+<button class="p-2 bg-white dark:bg-slate-800 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 transition-colors shadow-sm">
+<span class="material-symbols-outlined">zoom_in</span>
+</button>
+<button class="p-2 bg-white dark:bg-slate-800 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 transition-colors shadow-sm">
+<span class="material-symbols-outlined">print</span>
+</button>
+</div>
+</div>
+<!-- A4 Document -->
+<div class="a4-preview w-full max-w-[800px] bg-white rounded-sm p-12 text-slate-800 relative">
+<!-- Letterhead -->
+<div class="flex justify-between items-start border-b-2 border-primary/10 pb-8 mb-10">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 bg-primary rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-white">layers</span>
+</div>
+<span class="text-xl font-black text-primary tracking-tighter">VENTURE</span>
+</div>
+<div class="text-right text-[10px] text-slate-400 font-medium">
+<p>VENTURE SOLUTIONS S.A.</p>
+<p>AV. PAULISTA, 1000 - SÃO PAULO/SP</p>
+<p>CONTATO@VENTURE.COM.BR</p>
+</div>
+</div>
+<!-- Contract Body -->
+<div class="space-y-6">
+<h2 class="text-center text-xl font-bold uppercase tracking-widest mb-8">Contrato de Prestação de Serviços</h2>
+<div class="text-sm leading-relaxed space-y-4">
+<p>Pelo presente instrumento particular, de um lado <strong>VENTURE SOLUTIONS S.A.</strong>, inscrita no CNPJ sob nº 00.000.000/0001-00, doravante denominada CONTRATADA, e de outro lado:</p>
+<div class="bg-slate-50 p-4 rounded border border-slate-100 italic">
+                                [NOME DA EMPRESA / CLIENTE]<br/>
+                                [CNPJ / CPF DO CLIENTE]<br/>
+                                Doravante denominada CONTRATANTE.
+                            </div>
+<h3 class="font-bold border-l-4 border-primary pl-2 uppercase text-xs tracking-wider">Cláusula 1ª - Do Objeto</h3>
+<p>O presente contrato tem por objeto a prestação de serviços especializados conforme escopo detalhado: [ESCOPO DO PROJETO SERÁ INSERIDO AQUI].</p>
+<h3 class="font-bold border-l-4 border-primary pl-2 uppercase text-xs tracking-wider">Cláusula 2ª - Do Cronograma</h3>
+<p>As atividades terão início imediato após a assinatura deste instrumento, com previsão de entrega final em 90 (noventa) dias úteis.</p>
+</div>
+</div>
+<!-- Signature Section -->
+<div class="mt-20 pt-10 border-t border-slate-100">
+<div class="grid grid-cols-2 gap-12">
+<div class="flex flex-col items-center">
+<div class="w-full border-b border-slate-300 mb-2"></div>
+<span class="text-[10px] font-bold text-slate-400 uppercase">Venture Solutions S.A.</span>
+<div class="mt-4 p-3 bg-slate-50 rounded-lg border border-dashed border-slate-200 flex items-center gap-3 w-full">
+<div class="bg-white p-1 rounded border border-slate-200 shadow-sm">
+<div class="w-10 h-10 bg-slate-100 flex items-center justify-center rounded">
+<span class="material-symbols-outlined text-slate-400 text-sm">qr_code_2</span>
+</div>
+</div>
+<div class="text-[8px] text-slate-500 uppercase leading-tight">
+<p class="font-bold text-success flex items-center gap-1"><span class="material-symbols-outlined text-[10px]">verified</span> Assinado Digitalmente</p>
+<p>IP: 187.45.112.9</p>
+<p>Data: 24/05/2024 - 14:32:01</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-full border-b border-slate-300 mb-2"></div>
+<span class="text-[10px] font-bold text-slate-400 uppercase">Contratante</span>
+<div class="mt-4 flex flex-col items-center justify-center text-[10px] text-slate-300 py-6 border-2 border-dashed border-slate-100 rounded-xl w-full">
+<span class="material-symbols-outlined mb-1">pending_actions</span>
+<p>Aguardando Assinatura</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Watermark -->
+<div class="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none rotate-[-45deg]">
+<span class="text-8xl font-black">VENTURE ERP</span>
+</div>
+</div>
+<div class="mt-8 text-slate-500 text-xs flex items-center gap-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">lock</span> Criptografia de ponta-a-ponta</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">history</span> Backup automático habilitado</span>
+</div>
+</section>
+</main>
+</div>
+</body></html>

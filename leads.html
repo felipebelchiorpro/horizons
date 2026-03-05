@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VENTURE ERP - Gestão de Leads Estratégicos</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#19335d",
+                        "accent-blue": "#007bff",
+                        "high-value": "#FFD700",
+                        "success": "#10b981",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#0a192f",
+                        "slate-custom": "#1e293b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .kanban-column {
+            min-width: 320px;
+            max-width: 400px;
+        }
+        .glow-gold {
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-hidden">
+<div class="flex h-screen w-full">
+<!-- Sidebar Navigation -->
+<aside class="w-72 flex-shrink-0 bg-slate-900/50 border-r border-slate-800 flex flex-col justify-between p-6">
+<div class="flex flex-col gap-8">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-lg bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-2xl">rocket_launch</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-lg font-bold leading-tight tracking-wider">VENTURE</h1>
+<p class="text-slate-400 text-xs uppercase font-semibold">ERP Estratégico</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/20 text-accent-blue font-medium" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">target</span>
+<span>Oportunidades</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Leads</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span>Relatórios</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Configurações</span>
+</a>
+</nav>
+</div>
+<div class="flex flex-col gap-4">
+<button class="w-full py-3 px-4 bg-primary text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-primary/80 transition-all">
+<span class="material-symbols-outlined text-sm">add</span>
+                    Novo Lead
+                </button>
+<div class="flex items-center gap-3 p-2 border-t border-slate-800 pt-4">
+<div class="h-10 w-10 rounded-full bg-slate-700 overflow-hidden" data-alt="User profile avatar portrait">
+<img alt="Profile" class="h-full w-full object-cover" data-alt="Executive profile photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDteSNmM-gewf7PrNS5uozV1RZ8XAnuQC6aRs9Obch9t7VHuKzvM7xBaCmfs6OXL6x-3M8oEjaB-2puG6IAhZ0Ry1L_bKzddfRJ_lNoZmuLSibCa25DbewE_u-3c70GT_HEQf5qnzaJTSasqIiWEh7Z6Ons7vC5wHYJWD5PxBUkrxMaSn4Smr6nwljXV4Qa2Ftk6nRcedv4Ia5UGSFbxvaXaJI5d2qaCXLXPcXFboJOHr4z1lQswmBXf0nmIjjLZ17WQXwBn7v_l0Di"/>
+</div>
+<div class="flex flex-col">
+<p class="text-sm font-bold">Ricardo M.</p>
+<p class="text-xs text-slate-500">Diretor Comercial</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col min-w-0">
+<!-- Header -->
+<header class="h-20 flex items-center justify-between px-8 border-b border-slate-800 bg-background-dark/50">
+<div class="flex items-center gap-4">
+<h2 class="text-xl font-bold">Pipeline de Vendas</h2>
+<div class="flex items-center bg-slate-800 rounded-lg px-3 py-1 text-sm text-slate-300">
+<span class="material-symbols-outlined text-sm mr-2">filter_alt</span>
+                        Filtros Avançados
+                    </div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative">
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-white transition-colors">notifications</span>
+<div class="absolute -top-1 -right-1 h-2 w-2 bg-red-500 rounded-full"></div>
+</div>
+<div class="flex items-center gap-2 bg-slate-800/50 rounded-xl px-4 py-2 border border-slate-700">
+<span class="material-symbols-outlined text-slate-400">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-64 placeholder-slate-500" placeholder="Buscar leads ou empresas..." type="text"/>
+</div>
+</div>
+</header>
+<!-- Kanban Area -->
+<div class="flex-1 overflow-x-auto p-8 bg-background-dark">
+<div class="flex gap-6 h-full min-h-[600px]">
+<!-- Column 1 -->
+<div class="kanban-column flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<h3 class="font-bold flex items-center gap-2">
+<span class="h-2 w-2 rounded-full bg-accent-blue"></span>
+                                Novas Oportunidades
+                                <span class="text-slate-500 font-normal text-sm ml-2">4</span>
+</h3>
+<span class="material-symbols-outlined text-slate-500 text-sm cursor-pointer">more_horiz</span>
+</div>
+<div class="flex-1 glass-panel rounded-2xl p-4 flex flex-col gap-4 overflow-y-auto">
+<!-- Card 1 -->
+<div class="bg-slate-800/80 border border-slate-700 rounded-xl p-4 glow-gold hover:border-high-value/50 transition-all cursor-grab active:cursor-grabbing">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-1">
+<div class="h-1.5 w-6 rounded-full bg-high-value"></div>
+<div class="h-1.5 w-6 rounded-full bg-slate-600"></div>
+<div class="h-1.5 w-6 rounded-full bg-slate-600"></div>
+</div>
+<span class="bg-primary/30 text-accent-blue text-[10px] px-2 py-0.5 rounded-full font-bold uppercase">Ads</span>
+</div>
+<h4 class="font-bold text-base">Roberto Junqueira</h4>
+<p class="text-slate-400 text-sm mb-4">Tech Solutions S.A.</p>
+<div class="flex items-center justify-between border-t border-slate-700/50 pt-4">
+<span class="text-high-value font-bold">R$ 128.000,00</span>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-slate-400 text-lg hover:text-success cursor-pointer">chat</span>
+<span class="material-symbols-outlined text-slate-400 text-lg hover:text-accent-blue cursor-pointer">calendar_today</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-slate-800/80 border border-slate-700 rounded-xl p-4 hover:border-slate-500 transition-all cursor-grab active:cursor-grabbing">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-1">
+<div class="h-1.5 w-6 rounded-full bg-success"></div>
+<div class="h-1.5 w-6 rounded-full bg-success"></div>
+<div class="h-1.5 w-6 rounded-full bg-slate-600"></div>
+</div>
+<span class="bg-slate-700 text-slate-300 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase">Orgânico</span>
+</div>
+<h4 class="font-bold text-base">Carla Mendes</h4>
+<p class="text-slate-400 text-sm mb-4">Logística Brasil Ltda</p>
+<div class="flex items-center justify-between border-t border-slate-700/50 pt-4">
+<span class="text-slate-200 font-bold">R$ 45.500,00</span>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-slate-400 text-lg hover:text-success cursor-pointer">chat</span>
+<span class="material-symbols-outlined text-slate-400 text-lg hover:text-accent-blue cursor-pointer">description</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 2 -->
+<div class="kanban-column flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<h3 class="font-bold flex items-center gap-2">
+<span class="h-2 w-2 rounded-full bg-purple-500"></span>
+                                Reunião de Descoberta
+                                <span class="text-slate-500 font-normal text-sm ml-2">2</span>
+</h3>
+<span class="material-symbols-outlined text-slate-500 text-sm cursor-pointer">more_horiz</span>
+</div>
+<div class="flex-1 glass-panel rounded-2xl p-4 flex flex-col gap-4 overflow-y-auto">
+<!-- Selected Card -->
+<div class="bg-slate-700/50 border-2 border-accent-blue rounded-xl p-4 transition-all">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-1">
+<div class="h-1.5 w-6 rounded-full bg-success"></div>
+<div class="h-1.5 w-6 rounded-full bg-success"></div>
+<div class="h-1.5 w-6 rounded-full bg-success"></div>
+</div>
+<span class="bg-indigo-900/40 text-indigo-400 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase">Outbound</span>
+</div>
+<h4 class="font-bold text-base">Henrique Albuquerque</h4>
+<p class="text-slate-400 text-sm mb-4">Construtora Alpha</p>
+<div class="flex items-center justify-between border-t border-slate-700/50 pt-4">
+<span class="text-success font-bold">R$ 290.000,00</span>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-accent-blue text-lg cursor-pointer">chat</span>
+<span class="material-symbols-outlined text-accent-blue text-lg cursor-pointer">calendar_today</span>
+<span class="material-symbols-outlined text-accent-blue text-lg cursor-pointer">description</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 3 -->
+<div class="kanban-column flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<h3 class="font-bold flex items-center gap-2">
+<span class="h-2 w-2 rounded-full bg-amber-500"></span>
+                                Proposta Estratégica
+                                <span class="text-slate-500 font-normal text-sm ml-2">1</span>
+</h3>
+<span class="material-symbols-outlined text-slate-500 text-sm cursor-pointer">more_horiz</span>
+</div>
+<div class="flex-1 glass-panel rounded-2xl p-4 flex flex-col gap-4 overflow-y-auto">
+<div class="bg-slate-800/80 border border-slate-700 rounded-xl p-4 opacity-70">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-1">
+<div class="h-1.5 w-6 rounded-full bg-orange-500"></div>
+<div class="h-1.5 w-6 rounded-full bg-slate-600"></div>
+<div class="h-1.5 w-6 rounded-full bg-slate-600"></div>
+</div>
+<span class="bg-slate-700 text-slate-300 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase">Orgânico</span>
+</div>
+<h4 class="font-bold text-base">Sonia Maria</h4>
+<p class="text-slate-400 text-sm mb-4">Indústria de Metais</p>
+<div class="flex items-center justify-between border-t border-slate-700/50 pt-4">
+<span class="text-slate-200 font-bold">R$ 12.000,00</span>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-slate-400 text-lg">description</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 4 -->
+<div class="kanban-column flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<h3 class="font-bold flex items-center gap-2">
+<span class="h-2 w-2 rounded-full bg-success"></span>
+                                Fechamento
+                                <span class="text-slate-500 font-normal text-sm ml-2">0</span>
+</h3>
+<span class="material-symbols-outlined text-slate-500 text-sm cursor-pointer">more_horiz</span>
+</div>
+<div class="flex-1 glass-panel rounded-2xl p-4 flex flex-col gap-4 overflow-y-auto">
+<div class="h-full border-2 border-dashed border-slate-700/50 rounded-xl flex items-center justify-center text-slate-600">
+<p class="text-sm italic">Arraste aqui para fechar</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Side Panel: Potential Growth -->
+<aside class="w-96 flex-shrink-0 bg-slate-900 border-l border-slate-800 p-8 flex flex-col gap-8">
+<div class="flex flex-col gap-2">
+<h3 class="text-lg font-bold">Potencial de Crescimento</h3>
+<p class="text-slate-400 text-sm">Análise detalhada do lead selecionado</p>
+</div>
+<div class="flex flex-col gap-8">
+<!-- Selected Lead Brief -->
+<div class="flex items-center gap-4 p-4 bg-slate-800 rounded-xl border border-slate-700">
+<div class="h-12 w-12 rounded-lg bg-indigo-500/20 flex items-center justify-center text-indigo-400 font-bold text-xl">HA</div>
+<div class="flex flex-col">
+<h4 class="font-bold">Henrique Albuquerque</h4>
+<p class="text-xs text-slate-400">Construtora Alpha</p>
+</div>
+</div>
+<!-- Radial Charts (Minimalist Power BI Style) -->
+<div class="grid grid-cols-1 gap-6">
+<div class="flex flex-col items-center gap-4 bg-slate-800/30 p-6 rounded-2xl border border-slate-700/50">
+<div class="relative flex items-center justify-center">
+<!-- SVG Radial Progress -->
+<svg class="w-32 h-32 transform -rotate-90">
+<circle class="text-slate-800" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-accent-blue" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-dasharray="364.4" stroke-dashoffset="109.3" stroke-linecap="round" stroke-width="10"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-2xl font-bold">70%</span>
+<span class="text-[10px] text-slate-500 uppercase tracking-widest">Fit Ideal</span>
+</div>
+</div>
+<p class="text-sm font-medium text-slate-300">Compatibilidade com ERP</p>
+</div>
+<div class="flex flex-col items-center gap-4 bg-slate-800/30 p-6 rounded-2xl border border-slate-700/50">
+<div class="relative flex items-center justify-center">
+<svg class="w-32 h-32 transform -rotate-90">
+<circle class="text-slate-800" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-success" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-dasharray="364.4" stroke-dashoffset="72.8" stroke-linecap="round" stroke-width="10"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-2xl font-bold">80%</span>
+<span class="text-[10px] text-slate-500 uppercase tracking-widest">Scores</span>
+</div>
+</div>
+<p class="text-sm font-medium text-slate-300">Probabilidade de Fechamento</p>
+</div>
+</div>
+<!-- Growth Insights -->
+<div class="flex flex-col gap-4">
+<h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider">Insights Adicionais</h4>
+<div class="flex flex-col gap-3">
+<div class="flex items-start gap-3 text-sm">
+<span class="material-symbols-outlined text-high-value text-lg">trending_up</span>
+<p class="text-slate-300">Expansão de mercado detectada no último trimestre em MG/RJ.</p>
+</div>
+<div class="flex items-start gap-3 text-sm">
+<span class="material-symbols-outlined text-accent-blue text-lg">visibility</span>
+<p class="text-slate-300">Lead visitou a página de preços 4 vezes nas últimas 24h.</p>
+</div>
+</div>
+</div>
+<button class="w-full mt-auto py-3 bg-slate-800 border border-slate-700 text-white rounded-xl font-bold hover:bg-slate-700 transition-all">
+                    Ver Timeline Completa
+                </button>
+</div>
+</aside>
+</div>
+</body></html>
