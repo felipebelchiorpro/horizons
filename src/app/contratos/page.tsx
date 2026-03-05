@@ -133,7 +133,7 @@ export default function Contratos() {
         const marginBottom = 20;
 
         let logoBase64 = null;
-        try { logoBase64 = await loadImage('/logo.png'); } catch (e) { }
+        try { logoBase64 = await loadImage('/logo-contrato.png'); } catch (e) { } { }
 
         if (logoBase64) {
             // Center logo width=30
@@ -577,7 +577,7 @@ export default function Contratos() {
                     {/* Letterhead */}
                     <div className="flex justify-between items-start border-b-2 border-slate-200 pb-8 mb-10">
                         <div className="flex items-center gap-3">
-                            <img src="/logo.png" alt="Logo" className="h-8 w-auto object-contain" />
+                            <img src="/logo-contrato.png" alt="Logo do Contrato" className="h-8 w-auto object-contain" />
                             <span className="text-xl font-black text-slate-900 tracking-tighter">VENTURE</span>
                         </div>
                         <div className="text-right text-[10px] text-slate-500 font-medium">
